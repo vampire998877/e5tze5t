@@ -1,7 +1,4 @@
-const emojis = [
-  "🍀", "🦄", "🥷", "🎩", "🦋", "🍉", "🚀", "⚡", "🐙", "🎉", "🦑", "🍕", "🏄‍♀️", "🎭", "🎤", "🍹", "🏔️", "🎮"
-];
-
+const emojis = ["🍀", "🦄", "🥷", "🎩", "🦋", "🍉", "🚀", "⚡", "🐙", "🎉"];
 const dateIdeas = [
   "Mit dem Longboard, E-Scooter oder Fahrrad nachts durch die Stadt cruisen.",
   "Geheime Orte erkunden (verlassene Gebäude, Dächer, versteckte Spots).",
@@ -15,29 +12,24 @@ const dateIdeas = [
   "Sterne beobachten – Mit einer Decke draußen oder mit einer App die Sternbilder suchen."
 ];
 
-function generateRandom() {
-  let lastEmoji = sessionStorage.getItem("lastEmoji");
-  let lastIdea = sessionStorage.getItem("lastIdea");
+const emojiSelection = document.getElementById("emoji-selection");
+const dateIdeaElement = document.getElementById("date-idea");
 
-  let newEmoji, newIdea;
-  do {
-    newEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-  } while (newEmoji === lastEmoji);
+// Emojis in der Auswahl anzeigen
+emojis.forEach((emoji) => {
+  const emojiElement = document.createElement("div");
+  emojiElement.textContent = emoji;
+  emojiElement.classList.add("emoji");
+  emojiElement.addEventListener("click", () => selectEmoji(emoji));
+  emojiSelection.appendChild(emojiElement);
+});
 
-  do {
-    newIdea = dateIdeas[Math.floor(Math.random() * dateIdeas.length)];
-  } while (newIdea === lastIdea);
-
-  sessionStorage.setItem("lastEmoji", newEmoji);
-  sessionStorage.setItem("lastIdea", newIdea);
-
-  const dateIdeaElement = document.getElementById('date-idea');
-  dateIdeaElement.style.opacity = 0;
+// Funktion, um Emoji auszuwählen und die Idee zu zeigen
+function selectEmoji(selectedEmoji) {
+  emojiSelection.classList.add("hidden"); // Emojis verschwinden
   setTimeout(() => {
-    document.getElementById('emoji').textContent = newEmoji;
-    dateIdeaElement.textContent = newIdea;
+    const randomIdea = dateIdeas[Math.floor(Math.random() * dateIdeas.length)];
+    dateIdeaElement.textContent = randomIdea;
     dateIdeaElement.style.opacity = 1;
-  }, 300);
+  }, 500); // Kurze Verzögerung für bessere Animation
 }
-
-document.getElementById('emoji').addEventListener('click', generateRandom);
