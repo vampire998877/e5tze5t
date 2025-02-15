@@ -18,8 +18,15 @@ body {
   max-width: 90%;
 }
 
+.emoji-selection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+}
+
 .emoji {
-  font-size: 50px;
+  font-size: 40px;
   cursor: pointer;
   transition: transform 0.3s ease;
 }
@@ -36,4 +43,8 @@ body {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
   min-height: 50px;
+}
+
+.hidden {
+  display: none;
 }
